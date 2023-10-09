@@ -1,5 +1,5 @@
 {
-  "name": "playwright-tests",
+  "name": "rdc-test-runner",
   "version": "1.0.0",
   "description": "End to end tests for NULib applications using the Playwright testing framework",
   "main": "index.js",
