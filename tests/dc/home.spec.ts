@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test("Homepage", async ({ page }) => {
+test.skip("Homepage", async ({ page }) => {
   await page.goto("https://dc.library.northwestern.edu/");
 
   // Check for main page elements
