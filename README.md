@@ -1,4 +1,4 @@
-# NUL Automated Tests
+# RDC Test Runner
 
 A repository of [Playwright](https://playwright.dev/) tests for capturing and running end to end tests for NULib applications
 
@@ -10,10 +10,10 @@ Run the following from a terminal window on your machine
 
 ```bash
 # Clone the repository (only need to do this once)
-git clone ADDRESS_HERE
+git clone git@github.com:nulib/rdc-test-runner.git
 
 # Change into the repository directory
-cd playwright-tests
+cd rdc-test-runner
 
 # Install dependencies
 npm install # if you get errors, try `npm install --legacy-peer-deps`
