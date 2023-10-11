@@ -1,0 +1,34 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://dc.library.northwestern.edu/');
+  await page.getByRole('link', { name: 'Alice Stuart, Big Sur Hot Springs, November 14 Image' }).click();
+  await page.getByRole('button', { name: 'open' }).click();
+  await page.getByRole('button', { name: 'zoom in' }).click();
+  await page.getByRole('button', { name: 'zoom out' }).click();
+  await page.getByRole('button', { name: 'rotate right' }).click();
+  await page.getByRole('button', { name: 'rotate right' }).dblclick();
+  await page.getByRole('button', { name: 'rotate right' }).click();
+  await page.getByRole('button', { name: 'reset' }).click();
+  await page.getByRole('button', { name: 'close' }).click();
+  await page.getByRole('radio', { name: 'Verso' }).click();
+  await page.getByRole('radio', { name: 'Recto' }).click();
+  await page.getByTestId('work-viewer-wrapper').getByRole('button', { name: 'Search' }).click();
+  await page.getByTestId('work-viewer-wrapper').getByPlaceholder('Search').click();
+  await page.getByTestId('title').click();
+  await page.getByRole('button', { name: 'Find this item' }).click();
+  await page.getByTestId('facets-filter-close').click();
+  await page.getByRole('button', { name: 'Cite this item' }).click();
+  await page.getByTestId('facets-filter-close').click();
+  await page.getByRole('button', { name: 'Download and share' }).click();
+  await page.locator('div').filter({ hasText: 'https://api.dc.library.northwestern.edu/api/v2/works/84c1a298-893a-42d6-8123-8bf' }).nth(3).click();
+  const page1Promise = page.waitForEvent('popup');
+  await page.getByRole('link', { name: 'What is IIIF?' }).click();
+  const page1 = await page1Promise;
+  await page.getByTestId('facets-filter-close').click();
+  await page.locator('dd').filter({ hasText: 'Berkeley Folk Music Festival Archive--13. Miscellaneous Posters' }).click();
+  await page.getByTestId('related-items').getByText('Collection').click();
+  await page.getByText('Similar to Alice Stuart, Big Sur Hot Springs, November 14').click();
+  await page.getByText('Subject').nth(1).click();
+  await page.getByText('Subject').nth(2).click();
+});
