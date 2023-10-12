@@ -25,7 +25,7 @@ const { chromium } = require('playwright');
   await page.waitForSelector('css=p:nth-child(2)');
   const textContent = await page.textContent('css=p:nth-child(2)');
   const expectedText = "Explore digital resources from the Northwestern University Library collections – including letters, photographs, diaries, maps, and audiovisual materials - as well as licensed art historical images for teaching and reference.";
-  expect(textContent).toBe(expectedText);
+  await(textContent).toBe(expectedText);
 
   // Scroll the window
   await page.evaluate(() => {
@@ -53,7 +53,7 @@ const { chromium } = require('playwright');
     // Step 1: Learn More button present
     await page.waitForSelector('.c-dFdFHo');
     const buttonPresent = await page.isVisible('.c-dFdFHo');
-    expect(buttonPresent).toBe(true);
+    await(buttonPresent).toBe(true);
   
     // Step 2: Click featured collection
     await page.click('.c-kuQwSd .c-HUdxj');
@@ -70,7 +70,7 @@ const { chromium } = require('playwright');
     // Step 6: Featured collection present
     await page.waitForSelector('.c-kuQwSd .c-isMIbY');
     const collectionPresent = await page.isVisible('.c-kuQwSd .c-isMIbY');
-    expect(collectionPresent).toBe(true);
+    await(collectionPresent).toBe(true);
   
     // Step 7: Featured collection present
     // (Repeat the same pattern for the next 3 collections)
@@ -78,11 +78,11 @@ const { chromium } = require('playwright');
     // Step 8: Assert footer element present
     await page.waitForSelector('.c-dJSNvo');
     const footerPresent = await page.isVisible('.c-dJSNvo');
-    expect(footerPresent).toBe(true);
+    await(footerPresent).toBe(true);
   
     // Step 9: Assert text
     const textContent = await page.textContent('.c-loWniW > p');
-    expect(textContent).toBe("Your expected text");
+    await(textContent).toBe("Your expected text");
   
     // Step 10: Assert elements for social links (Repeat the pattern for other social links)
   
@@ -92,7 +92,7 @@ const { chromium } = require('playwright');
     // Step 12: Assert search input present
     await page.waitForSelector('name=search');
     const searchInputPresent = await page.isVisible('name=search');
-    expect(searchInputPresent).toBe(true);
+    await(searchInputPresent).toBe(true);
   
     // Step 13: Type "cats" into the search input
     await page.type('name=search', 'cats');
@@ -113,5 +113,4 @@ const { chromium } = require('playwright');
     // You can continue with additional test steps
   
     await browser.close();
-  })();
- 
+  )}
