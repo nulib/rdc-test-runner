@@ -2,11 +2,12 @@ import { test, expect } from '@playwright/test';
 
 test('test', async ({ page }) => {
   await page.goto('https://dc.library.northwestern.edu/');
+  await expect(page.getByRole('link', { name:'Libraries | Digital Collections' })).toBeVisible();
   await page.getByText('Northwestern UniversityExplore WorksBrowse CollectionsLibrariesAboutContactSign ');
   await page.locator('div').filter({ hasText: 'Libraries | Digital Collections' }).nth(3);
-  await page.locator('.swiper-wrapper').click();
+  await page.locator('.swiper-wrapper');
   await page.getByRole('heading', { name: 'Enrich your research with primary sources' });
-  await page.getByText('Explore digital resources from the Northwestern University Library collections –').click();
+  await page.getByText('Explore digital resources from the Northwestern University Library collections –');
   await page.getByText('Enrich your research with primary sourcesExplore digital resources from the Nort').click();
   await page.locator('section').filter({ hasText: 'Enrich your research with primary sourcesExplore digital resources from the Nort' }).locator('div').nth(3).click();
   await page.getByText('CollectionsView CollectionsArrow Forward').click();
@@ -19,7 +20,7 @@ test('test', async ({ page }) => {
   await page.getByRole('button', { name: 'Sull_1033.tif' }).click();
   await page.getByRole('button', { name: 'zoom in' }).click();
   await page.getByRole('button', { name: 'zoom out' }).click();
-  await page.goto('https://dc.library.northwestern.edu/');
+  await page.goBack()
   await page.getByRole('link', { name: 'Browse Collections' }).click();
   await page.locator('div').filter({ hasText: 'Northwestern UniversityExplore WorksBrowse CollectionsLibrariesAboutContactSign ' }).nth(2).click();
   await page.getByRole('heading', { name: 'All Collections' }).click();
