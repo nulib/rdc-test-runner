@@ -12,13 +12,16 @@ test('test', async ({ page }) => {
   await page.getByText('CollectionsView CollectionsArrow Forward').click();
   await page.locator('div').filter({ hasText: /^Ira Silverman Railroad Menu CollectionImage$/ }).first();
   await page.getByText('WorksExplore FurtherArrow Forward').click();
-  await page.getByRole('contentinfo').locator('div').filter({ hasText: '© 2023 Northwestern UniversityCampus Emergency InformationCareersContact Northwe' }).first().click();
+  await page.getByRole('contentinfo').locator('div').filter({ hasText: '© 2023 Northwestern UniversityCampus Emergency InformationCareersContact Northwe' }).first();
   await page.getByPlaceholder('Search by keyword or phrase, ex: Berkeley Music Festival').click();
-  await page.getByTestId('header-primary-ui-component').locator('span').click();
-  await page.getByRole('link', { name: 'CTA/S-428/Ex-6124, Broadway & Lawrence Image' }).click();
-  await page.getByRole('button', { name: 'Sull_1033.tif' }).click();
-  await page.getByRole('button', { name: 'zoom in' }).click();
-  await page.getByRole('button', { name: 'zoom out' }).click();
+  await page.getByRole ('button', { name: 'Browse Collections' }).click();
+  await expect (page.getByText('All Collections')).toBeVisible;
+  await page.getByPlaceholder('Filter titles').fill('Arabic');
+  await page.getByTitle('Arabic Manuscripts from West Africa').click()
+  await expect (page.getByText ('VIEW FINDING AID')).toBeVisible();
+  await expect (page.getByText ('VIEW THIS COLLECTION')).toBeVisible();
+  await expect (page.getByText ('Libraries|Digital Collections')).toBeVisible();
+  await page.getByPlaceholder('Search by keyword or phrase, ex: Berkeley Music Festival').click()
   await page.goBack()
   await page.getByRole('link', { name: 'Browse Collections' }).click();
   await page.locator('div').filter({ hasText: 'Northwestern UniversityExplore WorksBrowse CollectionsLibrariesAboutContactSign ' }).nth(2).click();
@@ -33,5 +36,6 @@ test('test', async ({ page }) => {
   await page.getByRole('button', { name: 'inu-dil-da486556-ac8d-4c00-af34-7e114b8cd979.tif' }).click();
   await page.getByTestId('title').click();
   await expect (page.getByText('Find this itemCite this itemDownload and share')).toBeVisible;
-  await page.(page.getByText('Find this item')).click();
-});
+  await page.getByPlaceholder('Search by keyword or phrase, ex: Berkeley Music Festival').click();
+  await page.getByPlaceholder('Search by keyword or phrase, ex: Berkeley Music Festival').fill('tintype fredrick aldridge');
+})
