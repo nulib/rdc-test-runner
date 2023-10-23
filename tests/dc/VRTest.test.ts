@@ -3,9 +3,8 @@ import { test, expect } from '@playwright/test';
 test('test', async ({ page }) => {
   await page.goto('https://dc.library.northwestern.edu/');
   await expect(page.getByRole('link', { name:'Libraries | Digital Collections' })).toBeVisible();
-  await page.getByText('Northwestern UniversityExplore WorksBrowse CollectionsLibrariesAboutContactSign ');
+  await expect (page.getByText('Northwestern UniversityExplore WorksBrowse CollectionsLibrariesAboutContactSign ')).toBeVisible;
   await page.locator('div').filter({ hasText: 'Libraries | Digital Collections' }).nth(3);
-  await page.locator('.swiper-wrapper');
   await page.getByRole('heading', { name: 'Enrich your research with primary sources' });
   await page.getByText('Explore digital resources from the Northwestern University Library collections –');
   await page.getByText('Enrich your research with primary sourcesExplore digital resources from the Nort').click();
@@ -33,5 +32,6 @@ test('test', async ({ page }) => {
   await page.getByRole('link', { name: 'Three cats sitting in window of clay house. Exterior Image' }).click();
   await page.getByRole('button', { name: 'inu-dil-da486556-ac8d-4c00-af34-7e114b8cd979.tif' }).click();
   await page.getByTestId('title').click();
-  await page.getByText('Find this itemCite this itemDownload and share');
+  await expect (page.getByText('Find this itemCite this itemDownload and share')).toBeVisible;
+  await page.(page.getByText('Find this item')).click();
 });
