@@ -1,10 +1,20 @@
 import { test, expect } from '@playwright/test';
+import { link } from 'fs';
 
 test('test', async ({ page }) => {
   await page.goto('https://dc.library.northwestern.edu/');
   await expect(page.getByRole('link', { name:'Libraries | Digital Collections' })).toBeVisible();
   await expect (page.getByText('Northwestern UniversityExplore WorksBrowse CollectionsLibrariesAboutContactSign ')).toBeVisible;
   await page.locator('div').filter({ hasText: 'Libraries | Digital Collections' }).nth(3);
+  await page.getByRole('link', { name: 'Browse Collections' }).click();
+  await expect (page.getByText('All Collections')).toBeVisible;
+  await page.getByPlaceholder('Filter titles').fill('Arabic');
+  await page.getByRole('link', { name: 'Arabic Manuscripts from West Africa'}).click()
+  await expect (page.getByText ('VIEW FINDING AID')).toBeVisible();
+  await expect (page.getByText ('VIEW THIS COLLECTION')).toBeVisible();
+  await expect (page.getByText ('Libraries|Digital Collections')).toBeVisible();
+  await page.getByPlaceholder('Search by keyword or phrase, ex: Berkeley Music Festival').click()
+  await page.goBack()
   await page.getByRole('heading', { name: 'Enrich your research with primary sources' });
   await page.getByText('Explore digital resources from the Northwestern University Library collections –');
   await page.getByText('Enrich your research with primary sourcesExplore digital resources from the Nort').click();
@@ -23,6 +33,7 @@ test('test', async ({ page }) => {
   await expect (page.getByText ('Libraries|Digital Collections')).toBeVisible();
   await page.getByPlaceholder('Search by keyword or phrase, ex: Berkeley Music Festival').click()
   await page.goBack()
+  await page.getByRole('link', { name: 'Browse Collections' }).scrollIntoViewIfNeeded()
   await page.getByRole('link', { name: 'Browse Collections' }).click();
   await page.locator('div').filter({ hasText: 'Northwestern UniversityExplore WorksBrowse CollectionsLibrariesAboutContactSign ' }).nth(2).click();
   await page.getByRole('heading', { name: 'All Collections' }).click();
