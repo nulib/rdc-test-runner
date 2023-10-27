@@ -3,16 +3,25 @@ import { link } from 'fs';
 
 test('test', async ({ page }) => {
   await page.goto('https://dc.library.northwestern.edu/');
+  //expect to see Library Header
   await expect(page.getByRole('link', { name:'Libraries | Digital Collections' })).toBeVisible();
+  //expect to see navigation buttons
   await expect (page.getByText('Northwestern UniversityExplore WorksBrowse CollectionsLibrariesAboutContactSign ')).toBeVisible;
   await page.locator('div').filter({ hasText: 'Libraries | Digital Collections' }).nth(3);
+  //go to browse collections
   await page.getByRole('link', { name: 'Browse Collections' }).click();
   await expect (page.getByText('All Collections')).toBeVisible;
-  await page.getByPlaceholder('Filter titles').fill('Arabic');
-  await page.getByRole('link', { name: 'Arabic Manuscripts from West Africa'}).click()
-  await expect (page.getByText ('VIEW FINDING AID')).toBeVisible();
-  await expect (page.getByText ('VIEW THIS COLLECTION')).toBeVisible();
-  await expect (page.getByText ('Libraries|Digital Collections')).toBeVisible();
+  //search for Arabic Manuscripts Collection
+  await page.getByPlaceholder('Filter titles').click();
+  await page.getByPlaceholder('Filter titles').fill('arabic');
+  await expect (page.getByRole('heading', { name: 'Arabic Manuscripts from West Africa' }).locator('a')).toBeVisible;
+  await expect (page.getByRole('link', { name: 'Libraries | Digital Collections' })).toBeVisible();
+  await expect (page.getByRole('link', { name: 'Browse Collections' })).toBeVisible;
+  await expect (page.getByRole('link', { name: 'View this Collection' })).toBeVisible();
+  await expect (page.getByRole('link', { name: 'View Finding Aid' })).toBeVisible();
+  await page.getByRole('tab', { name: 'About' }).click();
+  await page.getByRole('tab', { name: 'Collection Organization' }).click();
+  await page.getByRole('tab', { name: 'All Subjects' }).click();
   await page.getByPlaceholder('Search by keyword or phrase, ex: Berkeley Music Festival').click()
   await page.goBack()
   await page.getByRole('heading', { name: 'Enrich your research with primary sources' });
